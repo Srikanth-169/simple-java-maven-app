@@ -1,27 +1,36 @@
 pipeline {
     agent any
-    options {
-        skipStagesAfterUnstable()
+
+    environment {
+        IMAGE_NAME = 'myapp:latest'
     }
+
     stages {
+        stage('Checkout') {
+            steps {
+                git "https://github.com/Srikanth-169/simple-java-maven-app.git"
+            }
+        }
+
         stage('Build') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                sh 'mvn clean package'
             }
         }
-        stage('Test') {
+
+        stage('Docker Build') {
             steps {
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
+                sh 'docker build -t $IMAGE_NAME .'
             }
         }
-        stage('Deliver') { 
+
+        stage('Docker Run') {
             steps {
-                sh './jenkins/scripts/deliver.sh' 
+                sh '''
+                docker stop myapp || true
+                docker rm myapp || true
+                docker run -d -p 8081:8080 --name myapp $IMAGE_NAME
+                '''
             }
         }
     }
