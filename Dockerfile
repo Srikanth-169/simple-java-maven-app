@@ -8,7 +8,7 @@ WORKDIR /app
 COPY target/myapp-1.0.0.war app.war
 
 # Expose port 8080
-EXPOSE 8080
+EXPOSE 8081
 
 # Run the application
 ENTRYPOINT ["java", "-jar", "app.war"]
