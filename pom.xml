@@ -13,12 +13,12 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.2</version> <!-- Use the latest version or the version you prefer -->
-        <relativePath/> <!-- lookup parent from repository -->
+        <version>3.1.2</version>
+        <relativePath/>
     </parent>
 
     <properties>
-        <java.version>17</java.version> <!-- Adjust based on your environment -->
+        <java.version>17</java.version>
     </properties>
 
     <dependencies>
@@ -33,6 +33,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- JUnit for testing -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.9.3</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
